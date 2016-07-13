@@ -40,14 +40,14 @@ def checkForPokemonGo(region):
     htmlParser.feed(resultStr)
     return htmlParser.didFindGo()
 
-def isPokemonGoInCanada():
+def isPokemonGoInBrazil():
     try:
-        if (checkForPokemonGo("ca")):
-            print("Pokemon Go is now in Canada!")
+        if (checkForPokemonGo("br")):
+            print("Pokemon Go is now in Brazil!")
         else:
-            print("Pokemon Go is not in Canada yet")
+            print("Pokemon Go is not in Brazil yet")
     except PokemonGoError as e:
         print(e)
 
 if __name__ == "__main__":
-    isPokemonGoInCanada()
+    isPokemonGoInBrazil()
