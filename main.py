@@ -1,4 +1,6 @@
+# coding=utf-8
 import urllib.request
+import urllib.error
 import sys
 from html.parser import HTMLParser
 
@@ -21,19 +23,27 @@ class PokemonHTMLParser(HTMLParser):
     def didFindGo(self):
         return self.foundGo
 
+class PokemonGoError(Exception):
+    pass
 
 def checkForPokemonGo(region):
-    content = urllib.request.urlopen("https://itunes.apple.com/" + region + "/app/pokemon-go/id1094591345?mt=8")
+    try:
+        content = urllib.request.urlopen("https://itunes.apple.com/" + region + "/app/pokemon-go/id1094591345?mt=8")
+    except urllib.error.URLError as e:
+        raise PokemonGoError("Error loading iTunes URL")
     resultStr = content.read().decode(sys.stdout.encoding) # read the results, which returns as a bytes object, then convert to string object using terminal's encoding
     htmlParser = PokemonHTMLParser()
     htmlParser.feed(resultStr)
     return htmlParser.didFindGo()
 
 def isPokemonGoInCanada():
-    if (checkForPokemonGo("ca")):
-        print("Pokemon Go is now in Canada!")
-    else:
-        print("Pokemon Go is not in Canada yet")
+    try:
+        if (checkForPokemonGo("ca")):
+            print("Pokemon Go is now in Canada!")
+        else:
+            print("Pokemon Go is not in Canada yet")
+    except PokemonGoError as e:
+        print(e)
 
 if __name__ == "__main__":
     isPokemonGoInCanada()
