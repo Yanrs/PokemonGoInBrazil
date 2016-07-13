@@ -5,7 +5,7 @@ import sys
 from html.parser import HTMLParser
 
 eh = 'é'
-entryToFind = "Pok" + eh + "mon GO on the App Store"
+entryToFind = "Pok" + eh + "mon GO"
 
 class PokemonHTMLParser(HTMLParser):
     def __init__(self):
@@ -16,7 +16,7 @@ class PokemonHTMLParser(HTMLParser):
             for i in range(0,len(attrs)):
                 if (attrs[i][0] == "content"):
                     encoded = attrs[i][1].encode(sys.stdout.encoding)
-                    if (encoded.decode('utf-8') == entryToFind):
+                    if (entryToFind in encoded.decode('utf-8')):
                         # we found it, leave the loop
                         self.foundGo = True
                         break
