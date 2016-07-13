@@ -35,4 +35,5 @@ def isPokemonGoInCanada():
     else:
         print("Pokemon Go is not in Canada yet")
 
-isPokemonGoInCanada()
+if __name__ == "__main__":
+    isPokemonGoInCanada()
