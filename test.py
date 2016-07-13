@@ -6,7 +6,7 @@ import urllib.error
 import http.client
 import main
 
-# Pokemon Go in Canada Test Suite
+# Pokemon Go in Brazil Test Suite
 # --------------------------------
 # For the HTML Parser tests, unicode strings
 # are encoded to utf-8 in bytes, then passed into
@@ -54,9 +54,9 @@ class TestingPokemonGoMethods(unittest.TestCase):
             main.checkForPokemonGo("us")
 
     @patch("main.checkForPokemonGo")
-    def test_PokemonGoCanadaCall(self, checkForPokemonGo_mock):
-        main.isPokemonGoInCanada()
-        main.checkForPokemonGo.assert_called_once_with("ca")
+    def test_PokemonGoBrazilCall(self, checkForPokemonGo_mock):
+        main.isPokemonGoInBrazil()
+        main.checkForPokemonGo.assert_called_once_with("br")
 
 if __name__ == "__main__":
     unittest.main()
