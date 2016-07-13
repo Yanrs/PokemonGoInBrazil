@@ -10,7 +10,8 @@ entryToFind = "Pok" + eh + "mon GO"
 class PokemonHTMLParser(HTMLParser):
     def __init__(self):
         self.foundGo = False
-        HTMLParser.__init__(self)
+        self.html_parser_init_kwargs = { 'convert_charrefs' : True }
+        HTMLParser.__init__(self, **self.html_parser_init_kwargs)
     def handle_starttag(self, tag, attrs):
         if (self.foundGo == False and tag == "meta"):
             for i in range(0,len(attrs)):
